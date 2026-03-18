@@ -1,0 +1,129 @@
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background: linear-gradient(135deg, #0f0f0f, #1a1a2e);
+}
+
+/* CARD CONTAINER */
+.card {
+  position: relative;
+  width: 900px;
+  height: 500px;
+  margin: 100px auto;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+}
+
+/* RED SIDE */
+.card-bg {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(135deg, #ff1744, #e11d48);
+  transition: 0.6s ease-in-out;
+  z-index: 1;
+}
+
+.card.login-mode .card-bg {
+  left: 0;
+}
+
+.card.register-mode .card-bg {
+  left: 50%;
+}
+
+/* LEFT + RIGHT SECTIONS */
+.hero,
+.form {
+  width: 50%;
+  z-index: 2;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: 0.6s ease-in-out;
+}
+
+/* HERO SIDE */
+.hero {
+  color: white;
+  text-align: center;
+}
+
+.logo {
+  font-size: 42px;
+  font-weight: 700;
+}
+
+.logo span {
+  color: white;
+}
+
+.hero p {
+  margin: 20px 0;
+  color: #f1f1f1;
+  font-size: 16px;
+}
+
+.hero button {
+  padding: 12px 30px;
+  border-radius: 30px;
+  border: 2px solid white;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.hero button:hover {
+  background: white;
+  color: #e11d48;
+}
+
+/* FORM SIDE */
+.form {
+  background: #ffffff;
+  border-radius: 0 20px 20px 0;
+}
+
+.form h2 {
+  color: #111;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+/* INPUT BOXES */
+.form input {
+  margin: 12px 0;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  outline: none;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.form input:focus {
+  border: 1px solid #e11d48;
+  box-shadow: 0 0 0 2px rgba(225, 29, 72, 0.2);
+}
+
+/* SUBMIT BUTTON */
+.submit-btn {
+  margin-top: 20px;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, #ff1744, #e11d48);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(225, 29, 72, 0.4);
+}
