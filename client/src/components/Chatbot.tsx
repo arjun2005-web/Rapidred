@@ -9,7 +9,7 @@ interface Message {
   content: string;
 }
 
-export default function ChatBot() {
+export default function Chatbot() {
   const [open, setOpen]         = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
