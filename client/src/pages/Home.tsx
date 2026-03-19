@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
-import { useSocket } from "@/hooks/useSocket";
+import { useSocket } from "@/hooks/usesocket";
 import { useLocation } from "wouter";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
@@ -120,7 +120,7 @@ export default function Home() {
   const { on } = useSocket();
   useEffect(() => {
     const off = on("donor:new", () => { fetchDonors(); });
-    return off;
+    return () => { off(); };
   }, [on]);
 
   const fetchDonors = async () => {

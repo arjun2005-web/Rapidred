@@ -4,7 +4,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
-import ChatBot from "@/components/Chatbot";
+import ChatBot from "@/components/chatbot";
 
 import Login from "./pages/login";
 import Admin from "./pages/Admin";
@@ -12,12 +12,12 @@ import Hospital from "./pages/Hospital";
 import Home from "./pages/Home";
 import DonorProfile from "./pages/DonorProfile";
 
-// Protected Route — redirects if not logged in or wrong role
+// Protected Route
 function ProtectedRoute({
   component: Component,
   allowedRole,
 }: {
-  component: () => JSX.Element;
+  component: React.ComponentType;
   allowedRole?: string;
 }) {
   const [, setLocation] = useLocation();
@@ -30,10 +30,9 @@ function ProtectedRoute({
   }
 
   if (allowedRole && userRole !== allowedRole) {
-    // Redirect to their correct dashboard
-    if (userRole === "admin")    setLocation("/admin");
+    if (userRole === "admin")         setLocation("/admin");
     else if (userRole === "hospital") setLocation("/hospital");
-    else setLocation("/home");
+    else                              setLocation("/home");
     return null;
   }
 
@@ -61,10 +60,10 @@ function Router() {
   );
 }
 
-function chatbotWrapper() {
+function ChatBotWrapper() {
   const [location] = useLocation();
   if (location === "/") return null;
-  return <chatbot />;
+  return <ChatBot />;
 }
 
 function App() {
@@ -73,7 +72,7 @@ function App() {
       <TooltipProvider>
         <Toaster />
         <Router />
-        <chatbotWrapper />
+        <ChatBotWrapper />
       </TooltipProvider>
     </QueryClientProvider>
   );

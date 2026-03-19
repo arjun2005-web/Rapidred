@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSocket } from "@/hooks/useSocket";
+import { useSocket } from "@/hooks/usesocket";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Bell, X, Droplets, ClipboardList, PackageOpen, CheckCircle } from "lucide-react";
@@ -43,9 +43,9 @@ export default function RealtimeNotifications() {
     });
 
     return () => {
-      offDonor();
-      offRequest();
-      offInventory();
+      try { offDonor(); } catch {}
+      try { offRequest(); } catch {}
+      try { offInventory(); } catch {}
     };
   }, [on]);
 
