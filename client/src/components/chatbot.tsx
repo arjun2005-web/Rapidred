@@ -9,7 +9,7 @@ interface Message {
   content: string;
 }
 
-export default function Chatbot() {
+export default function ChatBot() {
   const [open, setOpen]         = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -48,7 +48,7 @@ export default function Chatbot() {
         body: JSON.stringify({
           model: "llama-3.1-8b-instant",
           max_tokens: 1000,
-          systemPrompt: `You are RapidRed AI Assistant, a helpful chatbot for a blood donation management system called RapidRed.
+          systemPrompt: `You are RapidRed AI Assistant, a helpful ChatBot for a blood donation management system called RapidRed.
 
 Your job is to:
 1. Help users find blood donors by blood type and location

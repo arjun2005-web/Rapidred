@@ -24,7 +24,16 @@ function maskPhone(phone: string) {
   return `${phone.slice(0,5)}****${phone.slice(-2)}`;
 }
 
+function getDonorEligibility(lastDonation: string | null): { eligible: boolean; daysLeft: number } {
+  if (!lastDonation) return { eligible: true, daysLeft: 0 };
+  const last = new Date(lastDonation);
+  const diffDays = (Date.now() - last.getTime()) / (1000 * 60 * 60 * 24);
+  if (diffDays < 56) return { eligible: false, daysLeft: Math.ceil(56 - diffDays) };
+  return { eligible: true, daysLeft: 0 };
+}
+
 function DonorCard({ donor }: { donor: Donor }) {
+  const eligibility = getDonorEligibility(donor.lastDonation);
   return (
     <Card className="p-5 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-2 border-transparent hover:border-primary/20">
       <div className="flex items-start justify-between mb-4">
@@ -65,11 +74,13 @@ function DonorCard({ donor }: { donor: Donor }) {
       </div>
 
       <div className="flex items-center justify-between">
-        <Badge variant={donor.available ? "default" : "secondary"}
-          className={donor.available ? "bg-green-500/10 text-green-600 border-green-200" : ""}>
-          {donor.available ? "Available" : "Unavailable"}
-        </Badge>
-        {donor.available ? (
+        <div className="flex flex-col gap-1">
+          <Badge variant={donor.available ? "default" : "secondary"}
+            className={donor.available && eligibility.eligible ? "bg-green-500/10 text-green-600 border-green-200" : "bg-amber-500/10 text-amber-600 border-amber-200"}>
+            {!donor.available ? "Unavailable" : eligibility.eligible ? "Available" : `Eligible in ${eligibility.daysLeft} days`}
+          </Badge>
+        </div>
+        {donor.available && eligibility.eligible ? (
           <div className="flex gap-1">
             <Button size="sm" variant="outline" className="gap-1 hover:border-primary/50 text-xs"
               onClick={() => { if(window.confirm(`📞 Call ${donor.name}?\n${donor.phone}\n\nClick OK to call now.`)) window.open(`tel:${donor.phone}`); }}>

@@ -61,10 +61,10 @@ function Router() {
   );
 }
 
-function ChatBotWrapper() {
+function chatbotWrapper() {
   const [location] = useLocation();
   if (location === "/") return null;
-  return <ChatBot />;
+  return <chatbot />;
 }
 
 function App() {
@@ -73,7 +73,7 @@ function App() {
       <TooltipProvider>
         <Toaster />
         <Router />
-        <ChatBotWrapper />
+        <chatbotWrapper />
       </TooltipProvider>
     </QueryClientProvider>
   );

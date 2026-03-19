@@ -49,14 +49,18 @@ function isEligible(donor: Donor): { eligible: boolean; reason: string } {
   if (!donor.available) return { eligible: false, reason: "Marked as unavailable" };
   if (donor.age && (donor.age < 18 || donor.age > 65))
     return { eligible: false, reason: "Age not in range (18-65)" };
-  if (donor.weight && donor.weight < 50)
-    return { eligible: false, reason: "Weight below 50kg" };
+  if (donor.weight && donor.weight < 45)
+    return { eligible: false, reason: "Weight below 45kg" };
   if (donor.lastDonation) {
     const last = new Date(donor.lastDonation);
     const diffDays = (Date.now() - last.getTime()) / (1000 * 60 * 60 * 24);
-    if (diffDays < 90) return { eligible: false, reason: `Last donated ${Math.floor(diffDays)} days ago (need 90)` };
+    const daysLeft = Math.ceil(56 - diffDays);
+    if (diffDays < 56) return { 
+      eligible: false, 
+      reason: `Must wait ${daysLeft} more day${daysLeft !== 1 ? "s" : ""} (last donated ${Math.floor(diffDays)} days ago)` 
+    };
   }
-  return { eligible: true, reason: "Fully eligible" };
+  return { eligible: true, reason: "Fully eligible ✅" };
 }
 
 // ── Location Match Score ────────────────────────────────────────────────────
