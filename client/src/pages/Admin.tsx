@@ -12,9 +12,9 @@ import {
 } from "lucide-react";
 import { useLocation } from "wouter";
 import BloodInventory from "@/components/BloodInventory";
-import AIEngine from "@/components/AIEngine";
+import AIEngine from "@/components/Aiengine";
 import DonorMap from "@/components/DonorMap";
-import RealtimeNotifications from "@/components/realtimenotification";
+import RealtimeNotifications from "@/components/RealtimeNotification";
 
 // ── Types ──────────────────────────────────────────────────────────────────
 interface Donor {

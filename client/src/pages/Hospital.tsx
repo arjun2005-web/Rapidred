@@ -15,9 +15,9 @@ import {
 import { useLocation } from "wouter";
 import BloodInventory from "@/components/BloodInventory";
 import DonorMap from "@/components/DonorMap";
-import HospitalAI from "@/components/HospitalAI";
+import HospitalAI from "@/components/Hospitalai";
 import SmartDonorMap from "@/components/SmartDonorMap";
-import RealtimeNotifications from "@/components/realtimenotification";
+import RealtimeNotifications from "@/components/RealtimeNotification";
 
 // ── Types ─────────────────────────────────────────────────────────────────
 interface BloodRequest {
@@ -484,14 +484,14 @@ function RequestsPage({ requests, hospitalId, onRefresh }: { requests: BloodRequ
 
 // ── Donor Matching Page (Hospital) ────────────────────────────────────────
 const COMPATIBLE_DONORS: Record<string, string[]> = {
-  "O+":  ["O+","O-"],
+  "A+":  ["A+", "A-", "O+", "O-"],
+  "A-":  ["A-", "O-"],
+  "B+":  ["B+", "B-", "O+", "O-"],
+  "B-":  ["B-", "O-"],
+  "AB+": ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"],
+  "AB-": ["AB-", "A-", "B-", "O-"],
+  "O+":  ["O+", "O-"],
   "O-":  ["O-"],
-  "A+":  ["A+","A-","O+","O-"],
-  "A-":  ["A-","O-"],
-  "B+":  ["B+","B-","O+","O-"],
-  "B-":  ["B-","O-"],
-  "AB+": ["A+","A-","B+","B-","AB+","AB-","O+","O-"],
-  "AB-": ["A-","B-","AB-","O-"],
 };
 
 function HospitalDonorMatching() {
